@@ -46,15 +46,15 @@ catch (IOException e)
 }
 
 
-// Console.WriteLine($"<code>");
+Console.WriteLine($"<code>");
 
-// WordFinderService wfservice = new WordFinderService();
-// var output = wfservice.FindWordsInList(list, lengthToSearch);
+WordFinderService wfservice = new WordFinderService();
+var output = wfservice.FindWordsInList(list, lengthToSearch);
 
-// foreach (var s in output)
-// {
-//     Console.WriteLine(s);
-// }
-// Console.WriteLine($"</code>");
+foreach (var s in output)
+{
+    Console.WriteLine(s);
+}
+Console.WriteLine($"</code>");
 
 

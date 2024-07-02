@@ -9,14 +9,16 @@ public class WordFinderService : IWordFinderService
         Dictionary<int, HashSet<string>> DictionaryOfHashSets = new();
         List<string> output = new();
 
+        // Creating the hashsets
         for (int i = 1; i <= wordToFindLength; i++)
         {
             DictionaryOfHashSets.Add(i, new HashSet<string>());
         }
 
+        //Filling the hashsets buckets.
         foreach (string text in words)
         {
-            if (DictionaryOfHashSets.ContainsKey(text.Length))
+            if (text.Length <= wordToFindLength)
             {
                 DictionaryOfHashSets[text.Length].Add(text);
             }
