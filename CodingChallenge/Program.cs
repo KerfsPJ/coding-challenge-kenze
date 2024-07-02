@@ -4,8 +4,20 @@
 using Services;
 
 List<string> list = new List<string>();
-const int lengthToSearch = 6; //Variable
-const string inputFileLocation = "input.txt";
+string inputFileLocation = "input.txt"; //Default values
+int lengthToSearch = 6; //Default values
+var arguments = Environment.GetCommandLineArgs();
+
+//Using CommandLine Variables
+if (arguments.Length == 3) // DLL + LengthToSearch + InputFile Location
+{
+    if (!int.TryParse(arguments[1], out lengthToSearch))
+    {
+        Console.WriteLine("Cannot Parse!");
+        lengthToSearch = 6;
+    }
+    inputFileLocation = arguments[2];
+}
 
 try
 {
@@ -34,15 +46,15 @@ catch (IOException e)
 }
 
 
-Console.WriteLine($"<code>");
+// Console.WriteLine($"<code>");
 
-WordFinderService wfservice = new WordFinderService();
-var output = wfservice.FindWordsInList(list, lengthToSearch);
+// WordFinderService wfservice = new WordFinderService();
+// var output = wfservice.FindWordsInList(list, lengthToSearch);
 
-foreach (var s in output)
-{
-    Console.WriteLine(s);
-}
-Console.WriteLine($"</code>");
+// foreach (var s in output)
+// {
+//     Console.WriteLine(s);
+// }
+// Console.WriteLine($"</code>");
 
 
