@@ -1,29 +1,17 @@
 namespace Services;
 
+using System;
 using IWordFinderService;
 
 public class WordFinderService : IWordFinderService
 {
     public List<string> FindWordsInList(List<string> words, int wordToFindLength)
     {
-        Dictionary<int, HashSet<string>> DictionaryOfHashSets = new();
+        Dictionary<int, HashSet<string>> DictionaryOfHashSets = CreateDictionaryOfHashSets(words, wordToFindLength);
         List<string> output = new();
 
-        // Creating the hashsets
-        for (int i = 1; i <= wordToFindLength; i++)
-        {
-            DictionaryOfHashSets.Add(i, new HashSet<string>());
-        }
 
-        //Filling the hashsets buckets.
-        foreach (string text in words)
-        {
-            if (text.Length <= wordToFindLength)
-            {
-                DictionaryOfHashSets[text.Length].Add(text);
-            }
-        }
-
+        //Only works on 2 wordparts.
         foreach (string t in DictionaryOfHashSets[wordToFindLength])
         {
             for (int firstWordLength = 1; firstWordLength < wordToFindLength; firstWordLength++)
@@ -39,6 +27,30 @@ public class WordFinderService : IWordFinderService
                 }
             }
         }
+
+
+
         return output;
+    }
+
+    private Dictionary<int, HashSet<string>> CreateDictionaryOfHashSets(List<string> words, int wordToFindLength)
+    {
+        Dictionary<int, HashSet<string>> DictionaryOfHashSets = new();
+        // Creating the hashsets
+        for (int i = 1; i <= wordToFindLength; i++)
+        {
+            DictionaryOfHashSets.Add(i, new HashSet<string>());
+        }
+
+        //Filling the hashsets buckets.
+        foreach (string text in words)
+        {
+            if (text.Length <= wordToFindLength)
+            {
+                DictionaryOfHashSets[text.Length].Add(text);
+            }
+        }
+
+        return DictionaryOfHashSets;
     }
 }
