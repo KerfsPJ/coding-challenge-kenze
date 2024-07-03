@@ -5,31 +5,37 @@ using IWordFinderService;
 
 public class WordFinderService : IWordFinderService
 {
+    private SplittingWordService splittingWordService = new SplittingWordService();
+
     public List<string> FindWordsInList(List<string> words, int wordToFindLength)
     {
         Dictionary<int, HashSet<string>> DictionaryOfHashSets = CreateDictionaryOfHashSets(words, wordToFindLength);
         List<string> output = new();
 
-
-        //Only works on 2 wordparts.
-        foreach (string t in DictionaryOfHashSets[wordToFindLength])
+        foreach (string currentWord in DictionaryOfHashSets[wordToFindLength])
         {
-            for (int firstWordLength = 1; firstWordLength < wordToFindLength; firstWordLength++)
+            var splittedWordList = splittingWordService.SplitWordIntoParts(currentWord);
+
+            foreach (var splittedWord in splittedWordList)
             {
-                int secondWordLength = wordToFindLength - firstWordLength;
 
-                var firstWord = t.Substring(0, firstWordLength);
-                var secondWord = t.Substring(firstWordLength);
-
-                if (DictionaryOfHashSets[firstWordLength].Contains(firstWord) && DictionaryOfHashSets[secondWordLength].Contains(secondWord))
+                List<string> wordSplits = [.. splittedWord.Split('+')];
+                bool correct = true;
+                foreach (var wordSplit in wordSplits)
                 {
-                    output.Add($"{firstWord}+{secondWord}={t}");
+                    //Elke split gaan nakijken in de hashtables of deze voorkomt.
+                    if (!DictionaryOfHashSets[wordSplit.Length].Contains(wordSplit))
+                    {
+                        correct = false;
+                        break;
+                    }
+                }
+                if (correct)
+                {
+                    output.Add($"{splittedWord}={currentWord}");
                 }
             }
         }
-
-
-
         return output;
     }
 

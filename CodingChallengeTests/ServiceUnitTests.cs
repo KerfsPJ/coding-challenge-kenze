@@ -23,7 +23,6 @@ public class ServiceUnitTests
     {
         //Arrange
         var wordFindingService = new WordFinderService();
-        //List<string> words = new List<string> { "a", "the", "anthe", "anthemmmmm" };
 
         //Act
         var ListWithOutputs = wordFindingService.FindWordsInList(words, wordToFindLength);
@@ -47,7 +46,6 @@ public class ServiceUnitTests
     {
         //Arrange
         var wordFindingService = new WordFinderService();
-        //List<string> words = new List<string> { "a", "the", "anthe", "anthemmmmm" };
 
         //Act
         var ListWithOutputs = wordFindingService.FindWordsInList(words, wordToFindLength);
