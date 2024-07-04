@@ -1,3 +1,7 @@
+You can start the application by running 'dotnet run --project .\CodingChallenge\'
+It is possible to give a different wordlength as first parameter and a different input file location as second parameter.
+
+
 # 6 letter words
 There's a file in the root of the repository, input.txt, that contains words of varying lengths (1 to 6 characters).
 
