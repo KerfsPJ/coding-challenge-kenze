@@ -16,7 +16,6 @@ public class ServiceUnitTests
     }
 
 
-
     [Theory]
     [MemberData(nameof(WordFinderService_CorrectInputData))]
     public void WordFinderService_WithCorrectInputs_ShouldReturnCorrectResults(List<string> words, int wordToFindLength, List<string> expected, int numberOfCorrectAnswers)
@@ -77,8 +76,8 @@ public class ServiceUnitTests
         yield return new object[] { "an", new List<string> { "a+n" } };
         yield return new object[] { "ant", new List<string> { "a+nt", "an+t", "a+n+t" } };
         yield return new object[] { "anth", new List<string> { "a+nth", "an+th", "ant+h", "a+n+th", "a+nt+h", "an+t+h", "a+n+t+h" } };
-        yield return new object[] { "anthe", new List<string> { "a+nthe", "an+the", "ant+he",  "anth+e", "a+n+the", "a+nt+he", "a+nth+e", "an+t+he", "an+th+e", "ant+h+e", "a+n+t+he", "a+n+th+e", "a+nt+h+e", "an+t+h+e", "a+n+t+h+e" } };
-        yield return new object[] { "anthem", new List<string> { "a+nthem","an+them","ant+hem","anth+em","anthe+m","a+n+them","a+nt+hem","a+nth+em","a+nthe+m","an+t+hem","an+th+em","an+the+m","ant+h+em","ant+he+m","anth+e+m","a+n+t+hem","a+n+th+em","a+n+the+m","a+nt+h+em","a+nt+he+m","a+nth+e+m","an+t+h+em","an+t+he+m","an+th+e+m","ant+h+e+m","a+n+t+h+em","a+n+t+he+m","a+n+th+e+m","a+nt+h+e+m","an+t+h+e+m","a+n+t+h+e+m" } };
+        yield return new object[] { "anthe", new List<string> { "a+nthe", "an+the", "ant+he", "anth+e", "a+n+the", "a+nt+he", "a+nth+e", "an+t+he", "an+th+e", "ant+h+e", "a+n+t+he", "a+n+th+e", "a+nt+h+e", "an+t+h+e", "a+n+t+h+e" } };
+        yield return new object[] { "anthem", new List<string> { "a+nthem", "an+them", "ant+hem", "anth+em", "anthe+m", "a+n+them", "a+nt+hem", "a+nth+em", "a+nthe+m", "an+t+hem", "an+th+em", "an+the+m", "ant+h+em", "ant+he+m", "anth+e+m", "a+n+t+hem", "a+n+th+em", "a+n+the+m", "a+nt+h+em", "a+nt+he+m", "a+nth+e+m", "an+t+h+em", "an+t+he+m", "an+th+e+m", "ant+h+e+m", "a+n+t+h+em", "a+n+t+he+m", "a+n+th+e+m", "a+nt+h+e+m", "an+t+h+e+m", "a+n+t+h+e+m" } };
     }
 
     [Theory]

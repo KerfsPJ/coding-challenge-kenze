@@ -9,14 +9,15 @@ int lengthToSearch = 6; //Default values
 var arguments = Environment.GetCommandLineArgs();
 
 //Using CommandLine Variables
-if (arguments.Length == 3) // DLL + LengthToSearch + InputFile Location
+if (arguments.Length > 1) // DLL + LengthToSearch + InputFile Location
 {
     if (!int.TryParse(arguments[1], out lengthToSearch))
     {
         Console.WriteLine("Cannot Parse!");
         lengthToSearch = 6;
     }
-    inputFileLocation = arguments[2];
+    if (arguments.Length > 2)
+        inputFileLocation = arguments[2];
 }
 
 try
@@ -30,7 +31,7 @@ try
     while ((line = reader.ReadLine()) != null)
     {
         // Read the stream as a string and trim potential unwanted spaces. --> Can we skip some input here?
-        string text = reader.ReadLine().Trim();
+        string text = line.Trim();
 
         if (text.Length <= lengthToSearch) //Skip input that is too long
         {

@@ -4,16 +4,18 @@ using ISplittingWordService;
 
 public class SplittingWordService : ISplittingWordService
 {
+
+    private Dictionary<int, List<int>> dictionaryOfCombinationsForEachLength = new();
     public List<string> SplitWordIntoParts(string word)
     {
-        List<int> combinations = new List<int>();
-        for (int i = 0; i < word.Length; i++)
+        if (!dictionaryOfCombinationsForEachLength.ContainsKey(word.Length))
         {
-            GenerateCombinations(0, i, word.Length, combinations);
+            dictionaryOfCombinationsForEachLength.Add(word.Length, GenerateCombinationsForLength(word.Length));
         }
 
-        List<string> SplittedWordList = new();
-        foreach (int combo in combinations)
+
+        List<string> splittedWordList = new();
+        foreach (int combo in dictionaryOfCombinationsForEachLength[word.Length])
         {
             string splittedWord = word;
             int currentCombo = combo;
@@ -24,12 +26,22 @@ public class SplittingWordService : ISplittingWordService
                 currentCombo /= 10;
             }
             splittedWord = splittedWord.Insert(currentCombo, "+");
-            SplittedWordList.Add(splittedWord);
+            splittedWordList.Add(splittedWord);
         }
-        return SplittedWordList;
+        return splittedWordList;
     }
 
-    void GenerateCombinations(int start, int remainingDigits, int wordLength, List<int> result, string current = "")
+    private List<int> GenerateCombinationsForLength(int length)
+    {
+        List<int> combinations = new List<int>();
+        for (int i = 0; i < length; i++)
+        {
+            GenerateCombinations(0, i, length, combinations);
+        }
+        return combinations;
+    }
+
+    private void GenerateCombinations(int start, int remainingDigits, int wordLength, List<int> result, string current = "")
     {
         if (remainingDigits == 0 && !string.IsNullOrEmpty(current))
         {
